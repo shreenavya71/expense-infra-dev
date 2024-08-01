@@ -1,5 +1,14 @@
+resource "aws_key_pair" "vpn" {
+    key_name   = "openvpn"
+    # you can paste the public key directly like this
+    #public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPb1dpBDXkNS2tdMIxyVL+KAiX2t+S1pDYb/9YR8nfIO navyashreesanthamolla@Navyashrees-iMac.local"
+    public_key = ("~/.ssh/openvpn.pub")
+    # ~ means my machine (mac) home directory
+}
+
 module "vpn" {
     source  = "terraform-aws-modules/ec2-instance/aws"
+    key_name = aws_key_pair.vpn.key_name
 
     name = "${var.project_name}-${var.environment}-vpn"
 
