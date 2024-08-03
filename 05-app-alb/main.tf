@@ -45,7 +45,7 @@ module "records" {
             allow_overwrite = true
             alias = {
                 name = aws_lb.app_alb.dns_name
-                zone_id = "aws_lb.app_alb.zone_id"
+                zone_id = aws_lb.app_alb.zone_id
             }
         }
     ]
