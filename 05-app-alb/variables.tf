@@ -14,3 +14,7 @@ variable "common_tags" {
         component = "app-alb"
     }
 }
+
+variable "zone_name" {
+    default = "devopsnavyahome.online"
+}

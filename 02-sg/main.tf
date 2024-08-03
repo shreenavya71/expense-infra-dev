@@ -155,7 +155,7 @@ resource "aws_security_group_rule" "bastion_public" {
     security_group_id = module.bastion.sg_id
 }
 
-resource "aws_security_group_rule" "app_alb_vpn" {
+resource "aws_security_group_rule" "app_alb_vpn" { # app_alb accepting connections from vpc
     type              = "ingress"
     from_port         = 80
     to_port           = 80
