@@ -17,7 +17,7 @@ module "backend" {
 }
 
 
-resource "null_resource" "cluster" {
+resource "null_resource" "backend" {
     triggers = {
         instance_id = module.backend.id # this will be triggered everytime instance is created
     }
@@ -28,8 +28,14 @@ resource "null_resource" "cluster" {
         host       = module.backend.private_ip
     }
     provisioner "file" {
-        source      = "backend.sh"
-        destination = "/tmp/backend.sh"
+        source      = "${var.common_tags.component}.sh"
+        destination = "/tmp/${var.common_tags.component}.sh"
+    }
+    provisioner "remote-exec" {
+        inline = [
+            "chmod +x /tmp/backend.sh",
+            "suo sh /tmp/backend.sh ${var.common_tags.component} ${var.common_tags.component} ${var.environment}"
+        ]
     }
 }
     

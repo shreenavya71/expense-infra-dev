@@ -1,3 +1,6 @@
 #!/bin/bash
-sudo dnf install ansible -y
+component=$1
+environment=$2
+dnf install ansible -y
 pip3.9 install botocore boto3
+ansible-pull -U https://github.com/shreenavya71/expense-ansible-roles.git main.yaml -e component=$component -e environment=$environment
