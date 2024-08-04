@@ -28,5 +28,9 @@ resource "null_resource" "cluster" {
         password = "DevOps321"
         host       = module.backend.private_ip
     }
+    provisioner "file" {
+        source      = "backend.sh"
+        destination = "/tmp/backend.sh"
+    }
 }
     
