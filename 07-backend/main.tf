@@ -140,3 +140,15 @@ resource "aws_autoscaling_group" "backend" {
     }
 }
 
+resource "aws_autoscaling_policy" "backend" {
+    name                   = "${var.project_name}-${var.environment}-${var.common_tags.component}"
+    policy_type            = "TargetTrackingScaling"
+    autoscaling_group_name = aws_autoscaling_group.backend.name
+
+    target_tracking_configuration {
+        predefined_metric_specification {
+            predefined_metric_type = "ASGAverageCPUUtilization"
+        }
+        target_value = 10.0
+    }
+}
