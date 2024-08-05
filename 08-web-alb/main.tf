@@ -32,6 +32,22 @@ resource "aws_lb_listener" "http" {
     }   
 }
 
+resource "aws_lb_listener" "https" {
+    load_balancer_arn = aws_lb.web_alb.arn
+    port              = "443"
+    protocol          = "HTTPS"
+
+    default_action {
+        type = "fixed-response"
+
+        fixed_response {
+            content_type = "text/html"
+            message_body = "<h1>This is Fixed response from Web ALB HTTPS</h1>"
+            status_code  = "200"
+        }
+    }   
+}
+
 module "records" {
     source  = "terraform-aws-modules/route53/aws//modules/records"
     version = "~> 3.0"
