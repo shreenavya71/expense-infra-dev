@@ -86,11 +86,11 @@ resource "aws_lb_target_group" "backend" {
 
 resource "aws_launch_template" "backend" {
     name = "${var.project_name}-${var.environment}-${var.common_tags.component}"
-    image_id = "aws_ami_from_instance_backend.id"
+    image_id = aws_ami_from_instance.backend.id
     instance_initiated_shutdown_behavior = "terminate"
     instance_type = "t3.micro"
     update_default_version = true # sets the latest version to default version
-    vpc_security_group_ids = ["data.aws_ssm_parameter.backend_sg_id.value"]
+    vpc_security_group_ids = [data.aws_ssm_parameter.backend_sg_id.value]
     tag_specifications {
         resource_type = "instance"
 
@@ -163,7 +163,7 @@ resource "aws_lb_listener_rule" "backend" {
         target_group_arn = aws_lb_target_group.backend.arn
     }
 
-        condition {
+    condition {
         host_header {
         values = ["backend.app-${var.environment}.${var.zone_name}"]
         }
