@@ -28,6 +28,16 @@ module "frontend" {
     sg_name = "frontend"
 }
 
+module "web_alb" {
+    source = "../../terraform-aws-securitygroup"
+    project_name = var.project_name
+    environment = var.environment
+    sg_description = "SG for Web ALB  Instances"
+    vpc_id = data.aws_ssm_parameter.vpc_id.value
+    common_tags = var.common_tags
+    sg_name = "web-alb"
+}
+
 module "bastion" {
     source = "../../terraform-aws-securitygroup"
     project_name = var.project_name
