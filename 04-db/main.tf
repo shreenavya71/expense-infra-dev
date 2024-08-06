@@ -34,8 +34,8 @@ module "db" {
     )
 
     manage_master_user_password = false
-    password = "ExpenseApp1"
-    skip_final_snapshot = true
+    password = "ExpenseApp1"                    # we have to keep the password in the security manager
+    skip_final_snapshot = true                  # we have to give false here because when we are deleting it will create a snapshot thats why we are giving true for now
     parameters = [
         {
         name  = "character_set_client"
