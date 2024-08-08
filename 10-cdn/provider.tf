@@ -7,7 +7,7 @@ terraform {
     }
     backend "s3" { 
         bucket = "navya-remote-state-bucket"
-        key    = "expense-dev-app-alb"    # you can give any name ---change the key for every diff project
+        key    = "expense-dev-cdn"    # you can give any name ---change the key for every diff project
         region = "us-east-1"
         dynamodb_table = "remote-locking"   
     }
