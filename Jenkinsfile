@@ -16,8 +16,8 @@ pipeline {
         stage('Init') {
             steps {
                 sh """
-                    cd 01-vpc
-                    terraform init -reconfigure
+                cd 01-vpc
+                terraform init -reconfigure
                 """
             }
         }
@@ -44,19 +44,6 @@ pipeline {
                 message "Should we continue?"
                 ok "yes, we should."
             }
-            steps {
-                sh """
-                cd 01-vpc
-                terraform apply -auto-approve
-                """
-            }
-        stage('Deploy') {
-            when {
-                expression{
-                    params.action == 'Destroy'
-                }
-            }
-        }
             steps {
                 sh """
                 cd 01-vpc
