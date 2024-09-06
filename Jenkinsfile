@@ -51,6 +51,19 @@ pipeline {
                 """
             }
         }
+        stage('Destroy') {
+            when {
+                expression{
+                    params.action == 'Destroy'
+                }
+            
+            steps {
+                sh """
+                cd 01-vpc
+                terraform destroy -auto-approve
+                """
+            }
+        }
         stage('print params') {
             steps {
                 echo "Hello ${params.PERSON}"
