@@ -56,7 +56,7 @@ pipeline {
                 expression{
                     params.action == 'Destroy'
                 }
-            
+            }
             steps {
                 sh """
                 cd 01-vpc
@@ -65,17 +65,7 @@ pipeline {
             }
         }
     }
-        stage('print params') {
-            steps {
-                echo "Hello ${params.PERSON}"
-                echo "Biography: ${params.BIOGRAPHY}"
-                echo "Toggle: ${params.TOGGLE}"
-                echo "Choice: ${params.CHOICE}"
-                echo "Password: ${params.PASSWORD}"
-                echo "triggered test"
-            }
-        }
-    }
+    
     post {
         always {
             echo 'I will always say Hello again!'
