@@ -64,6 +64,7 @@ pipeline {
                 """
             }
         }
+    }
         stage('print params') {
             steps {
                 echo "Hello ${params.PERSON}"
@@ -87,5 +88,4 @@ pipeline {
             echo 'I will run when pipeline is failure'
         }
     }
-}
 }
